@@ -1,27 +1,16 @@
 defmodule Rockelivery.Users.Get do
   alias Ecto.UUID
-  alias Rockelivery.{Repo, User}
+  alias Rockelivery.{Error, Repo, User}
 
   def by_id(id) do
     case UUID.cast(id) do
-      :error -> {:error, %{status: :bad_request, result: "Invalid UUID"}}
+      :error -> {:error, Error.invalid_uuid()}
       {:ok, uuid} -> get(uuid)
     end
   end
-
-  # def by_id(id) do
-  #   with {:ok, uuid} <- UUID.cast(id),
-  #        %User{} = user <- Repo.get(User, uuid) do
-  #     {:ok, user}
-  #   else
-  #     :error -> {:error, %{status: :bad_request, result: "Invalid UUID"}}
-  #     nil -> {:error, %{status: :not_found, result: "User not found"}}
-  #   end
-  # end
-
   defp get(id) do
     case Repo.get(User, id) do
-      nil -> {:error, %{status: :not_found, result: "User not found"}}
+      nil -> {:error, Error.user_not_found()}
       user -> {:ok, user}
     end
   end
