@@ -1,8 +1,11 @@
 defmodule RockeliveryWeb.Router do
   use RockeliveryWeb, :router
 
+  alias RockeliveryWeb.Plugs.ValidateUUID
+
   pipeline :api do
     plug :accepts, ["json"]
+    plug ValidateUUID
   end
 
   scope "/api", RockeliveryWeb do
