@@ -17,7 +17,7 @@ defmodule Rockelivery.Users.CreateTest do
 
     test "it should return an error, when invalid params are provided" do
       result =
-        build(:user_params, %{password: "foo"})
+        build(:user_params, %{"password" => "foo"})
         |> Create.call()
 
       assert {:error, %Error{status: :bad_request, result: changeset}} = result

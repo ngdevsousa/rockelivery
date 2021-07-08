@@ -18,10 +18,10 @@ defmodule Rockelivery.UserTest do
     test "it should return an invalid changeset, when one of the params is invalid" do
       params =
         build(:user_params, %{
-          age: 1,
-          cpf: "000",
-          email: "foo",
-          password: "bar"
+          "age" => 1,
+          "cpf" => "000",
+          "email" => "foo",
+          "password" => "bar"
         })
 
       result = User.changeset(params)
