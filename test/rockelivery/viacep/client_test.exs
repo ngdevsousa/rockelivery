@@ -1,6 +1,8 @@
 defmodule Rockelivery.ViaCep.ClientTest do
   use ExUnit.Case, async: true
 
+  import Rockelivery.Factory
+
   alias Rockelivery.Error
   alias Rockelivery.ViaCep.Client
 
@@ -35,20 +37,7 @@ defmodule Rockelivery.ViaCep.ClientTest do
 
       res = Client.get_cep_info(url, cep)
 
-      expected_res =
-        {:ok,
-         %{
-           "bairro" => "Sé",
-           "cep" => "01001-000",
-           "complemento" => "lado ímpar",
-           "ddd" => "11",
-           "gia" => "1004",
-           "ibge" => "3550308",
-           "localidade" => "São Paulo",
-           "logradouro" => "Praça da Sé",
-           "siafi" => "7107",
-           "uf" => "SP"
-         }}
+      expected_res = {:ok, build(:cep_info)}
 
       assert res == expected_res
     end

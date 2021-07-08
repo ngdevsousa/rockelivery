@@ -2,10 +2,17 @@ defmodule RockeliveryWeb.UsersControllerTest do
   use RockeliveryWeb.ConnCase, async: true
 
   import Rockelivery.Factory
+  import Mox
+
+  alias Rockelivery.ViaCep.ClientMock
 
   describe "create/2" do
     test "it should be able to create a new user when all params are valid", %{conn: conn} do
       params = build(:user_request)
+
+      expect(ClientMock, :get_cep_info, fn _cep ->
+        {:ok, build(:cep_info)}
+      end)
 
       result =
         conn
@@ -40,7 +47,9 @@ defmodule RockeliveryWeb.UsersControllerTest do
   end
 
   describe "delete/2" do
-    test "it should be able to delete a user when there's a record with the given id", %{conn: conn} do
+    test "it should be able to delete a user when there's a record with the given id", %{
+      conn: conn
+    } do
       id = "1a29846e-513f-4d22-8152-d5e0fbf373f8"
       insert(:user)
 
