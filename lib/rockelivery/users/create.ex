@@ -15,6 +15,6 @@ defmodule Rockelivery.Users.Create do
     end
   end
 
-  defp client(),
+  defp client,
     do: :rockelivery |> Application.fetch_env!(__MODULE__) |> Keyword.get(:via_cep_adapter)
 end

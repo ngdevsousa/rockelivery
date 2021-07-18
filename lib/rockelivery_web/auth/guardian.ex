@@ -23,5 +23,5 @@ defmodule RockeliveryWeb.Auth.Guardian do
     end
   end
 
-  def authenticate(), do: {:error, Error.build(:bad_request, "Invalid params")}
+  def authenticate, do: {:error, Error.build(:bad_request, "Invalid params")}
 end
