@@ -9,7 +9,7 @@ defmodule Rockelivery.Item do
   @items_categories [:food, :drink, :desert]
   @required_params [:category, :description, :price, :photo]
   @required_update_params @required_params
-  @derive {Jason.Encoder, only: @required_params ++ [ :id ]}
+  @derive {Jason.Encoder, only: @required_params ++ [:id]}
 
   schema "items" do
     field :category, Ecto.Enum, values: @items_categories

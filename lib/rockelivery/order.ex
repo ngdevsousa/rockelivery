@@ -10,15 +10,15 @@ defmodule Rockelivery.Order do
 
   @payment_methods [:money, :credit_card, :debit_card]
   @required_params [:address, :comments, :payment_method, :user_id]
-  @derive {Jason.Encoder, only: @required_params ++ [ :id, :items ]}
+  @derive {Jason.Encoder, only: @required_params ++ [:id, :items]}
 
   schema "orders" do
-    field :address, :string
-    field :comments, :string
-    field :payment_method, Ecto.Enum, values: @payment_methods
+    field(:address, :string)
+    field(:comments, :string)
+    field(:payment_method, Ecto.Enum, values: @payment_methods)
 
-    many_to_many :items, Item, join_through: "orders_items"
-    belongs_to :user, User
+    many_to_many(:items, Item, join_through: "orders_items")
+    belongs_to(:user, User)
 
     timestamps()
   end
