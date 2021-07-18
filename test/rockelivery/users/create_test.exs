@@ -27,7 +27,7 @@ defmodule Rockelivery.Users.CreateTest do
         |> Create.call()
 
       assert {:error, %Error{status: :bad_request, result: changeset}} = result
-      expected_result = %{password: ["should be at least 8 character(s)"]}
+      expected_result = %{password: ["should be at least 4 character(s)"]}
 
       assert errors_on(changeset) == expected_result
     end
